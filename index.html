@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Top Navigation Bar (Netflix Cinematic Header) -->
+  <!-- Top Navigation Bar -->
   <header class="nfg-navbar" id="nfgNavbar">
     <div class="nav-left">
       <a class="nfg-brand" id="brandHomeBtn" title="Nexus Home">
@@ -66,7 +66,7 @@
 
       <!-- User Profile Avatar ("Who's Watching?" trigger) -->
       <div class="user-profile-chip" id="profileDropdownBtn" title="Who's Watching? (Switch Profile)">
-        <img src="" alt="Avatar" id="navUserAvatar" class="avatar-netflix" />
+        <img src="" alt="Avatar" id="navUserAvatar" class="avatar-profile" />
         <span class="nav-username" id="navUserName">...</span>
         <svg class="chevron-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="6 9 12 15 18 9"></polyline>
@@ -77,21 +77,21 @@
 
   <!-- Main Container -->
   <main class="nfg-main">
-    <!-- Instagram Stories Shelf (Styled with Netflix Red Glowing Rings) -->
+    <!-- Instagram Stories Shelf -->
     <section class="stories-shelf-wrapper">
       <div class="stories-shelf" id="storiesShelf">
         <!-- Rendered via JS -->
       </div>
     </section>
 
-    <!-- Netflix Billboard Hero Banner (Featured Top Post / Reel of the Day) -->
+    <!-- Featured Top Post / Reel of the Day -->
     <section class="billboard-container" id="billboardContainer">
       <div class="billboard-media-wrapper">
         <img src="" alt="Billboard Cover" id="billboardBackdrop" class="billboard-backdrop" />
         <video id="billboardVideo" class="billboard-video" loop muted playsinline style="display: none;"></video>
       </div>
 
-      <!-- Netflix Vignette Overlays -->
+      <!-- Vignette Overlays -->
       <div class="billboard-vignette-left"></div>
       <div class="billboard-vignette-bottom"></div>
 
@@ -139,7 +139,7 @@
       <button class="btn-clear-filter" id="clearFilterBtn">Clear Filter &times;</button>
     </div>
 
-    <!-- Feed Sections (Netflix Carousel Rows + Instagram Grid Cards) -->
+    <!-- Feed Sections -->
     <div class="nfg-rows-container" id="nfgRowsContainer">
       <!-- Row 1: Top 10 Today -->
       <section class="nfg-row" id="top10RowSection">
@@ -188,7 +188,7 @@
   </main>
 
   <!-- ===================================================================== -->
-  <!-- MODAL 1: "Who's Watching?" Netflix Profile Switcher Modal             -->
+  <!-- MODAL 1: Profile Switcher                                             -->
   <!-- ===================================================================== -->
   <div class="nfg-modal-backdrop" id="profileSwitcherModal" style="display: none;">
     <div class="profile-switcher-card">
@@ -216,14 +216,14 @@
         </div>
         <div class="form-buttons">
           <button type="button" class="btn-text" id="cancelAddProfileBtn">Cancel</button>
-          <button type="submit" class="btn-netflix-red">Create Profile</button>
+          <button type="submit" class="btn-nexus-red">Create Profile</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- ===================================================================== -->
-  <!-- MODAL 2: Instagram Story Viewer Modal (Netflix Dark Phone Frame)       -->
+  <!-- MODAL 2: Instagram Story Viewer Modal                                  -->
   <!-- ===================================================================== -->
   <div class="nfg-modal-backdrop" id="storyViewerModal" style="display: none;">
     <div class="story-phone-frame" id="storyPhoneFrame">
@@ -306,14 +306,14 @@
 
         <div class="form-group">
           <label for="createCaptionInput">Caption & Description</label>
-          <textarea id="createCaptionInput" rows="3" placeholder="Write a caption... Tag #netflix #strangerthings #tech"></textarea>
+          <textarea id="createCaptionInput" rows="3" placeholder="Write a caption... Tag #nexus #strangerthings #tech"></textarea>
         </div>
 
         <div class="form-group">
           <label>Hashtags & Themes</label>
           <div class="quick-tags-strip">
             <span class="quick-chip" data-tag="trending">+ #trending</span>
-            <span class="quick-chip" data-tag="netflix">+ #netflix</span>
+            <span class="quick-chip" data-tag="nexus">+ #nexus</span>
             <span class="quick-chip" data-tag="strangerthings">+ #strangerthings</span>
             <span class="quick-chip" data-tag="wednesday">+ #wednesday</span>
             <span class="quick-chip" data-tag="cyberpunk">+ #cyberpunk</span>
@@ -323,14 +323,14 @@
 
         <div class="dialog-footer">
           <button type="button" class="btn-secondary" id="cancelCreateBtn">Cancel</button>
-          <button type="submit" class="btn-netflix-red" id="submitCreateBtn">Publish to Nexus</button>
+          <button type="submit" class="btn-nexus-red" id="submitCreateBtn">Publish to Nexus</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- ===================================================================== -->
-  <!-- MODAL 4: Post & Reel Split Detail View (Instagram x Netflix Player)    -->
+  <!-- MODAL 4: Post & Reel Split Detail View                                 -->
   <!-- ===================================================================== -->
   <div class="nfg-modal-backdrop" id="postDetailModal" style="display: none;">
     <div class="detail-split-dialog">

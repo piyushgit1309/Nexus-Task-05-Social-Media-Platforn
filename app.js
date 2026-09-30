@@ -4,9 +4,9 @@
  */
 
 // ============================================================================
-// 1. NETFLIX AVATARS & SEED DATA
+// 1. NEXUS AVATARS & SEED DATA
 // ============================================================================
-const NETFLIX_AVATARS = [
+const NEXUS_AVATARS = [
   { id: 'av_red', name: 'Classic Red', url: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=200&q=80' },
   { id: 'av_blue', name: 'Cyber Blue', url: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80' },
   { id: 'av_magenta', name: 'Neon Glitch', url: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=200&q=80' },
@@ -21,7 +21,7 @@ const SEED_DATA = {
       name: 'Eleven',
       handle: 'eleven_hopper',
       bio: 'Friends don\'t lie. Waffles, telekinesis, and Hawkins High. 🧇✨',
-      avatar: NETFLIX_AVATARS[0].url,
+      avatar: NEXUS_AVATARS[0].url,
       coverBanner: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
       followers: ['usr_geralt', 'usr_wednesday', 'usr_v'],
       following: ['usr_geralt', 'usr_wednesday'],
@@ -33,7 +33,7 @@ const SEED_DATA = {
       name: 'Geralt of Rivia',
       handle: 'white_wolf',
       bio: 'Witcher for hire. Swords, potions, and tossing coins to your bard. ⚔️🐺',
-      avatar: NETFLIX_AVATARS[1].url,
+      avatar: NEXUS_AVATARS[1].url,
       coverBanner: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80',
       followers: ['usr_eleven'],
       following: ['usr_eleven', 'usr_v'],
@@ -45,7 +45,7 @@ const SEED_DATA = {
       name: 'Wednesday Addams',
       handle: 'wednesday_nevermore',
       bio: 'I act as if I don\'t care if people dislike me. Deep down… I secretly enjoy it. 🖤🎻',
-      avatar: NETFLIX_AVATARS[2].url,
+      avatar: NEXUS_AVATARS[2].url,
       coverBanner: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1200&q=80',
       followers: ['usr_eleven', 'usr_geralt'],
       following: ['usr_eleven'],
@@ -57,7 +57,7 @@ const SEED_DATA = {
       name: 'V (Night City)',
       handle: 'cyber_v',
       bio: 'Mercenary legend of Night City. Chrome, netrunning, and neon nights. 🦾⚡',
-      avatar: NETFLIX_AVATARS[3].url,
+      avatar: NEXUS_AVATARS[3].url,
       coverBanner: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
       followers: ['usr_geralt'],
       following: ['usr_eleven'],
@@ -134,12 +134,12 @@ const SEED_DATA = {
       type: 'post',
       title: 'STARCOURT SECRET TUNNEL // HAWKINS HIGHS',
       matchScore: '99% Match',
-      caption: 'Found the entrance to the Starcourt underground tunnel. Keeping the radio tuned to channel 11. Friends don\'t lie. #hawkins #strangerthings #upsidedown #netflix',
+      caption: 'Found the entrance to the Starcourt underground tunnel. Keeping the radio tuned to channel 11. Friends don\'t lie. #hawkins #strangerthings #upsidedown #nexus',
       media: {
         type: 'image',
         url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80'
       },
-      tags: ['hawkins', 'strangerthings', 'upsidedown', 'netflix'],
+      tags: ['hawkins', 'strangerthings', 'upsidedown', 'nexus'],
       likes: ['usr_geralt', 'usr_wednesday', 'usr_v'],
       comments: [
         {
@@ -266,9 +266,9 @@ const SEED_DATA = {
 // ============================================================================
 // 2. CENTRAL REACTIVE STORE
 // ============================================================================
-class NetFlixgramStore {
+class NexusStore {
   constructor() {
-    this.STORAGE_KEY = 'netflixgram_store_v2';
+    this.STORAGE_KEY = 'nexus_store_v1';
     this.subscribers = new Set();
     this.activeFilter = 'all'; // 'all' | 'reels' | 'trending' | 'my_list' | 'explore'
     this.searchQuery = '';
@@ -351,7 +351,7 @@ class NetFlixgramStore {
       name: name.trim(),
       handle: cleanHandle,
       bio: bio ? bio.trim() : 'Nexus Explorer',
-      avatar: avatarUrl || NETFLIX_AVATARS[0].url,
+      avatar: avatarUrl || NEXUS_AVATARS[0].url,
       coverBanner: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
       followers: [],
       following: [],
@@ -597,7 +597,7 @@ class NetFlixgramStore {
       .filter(n => n.recipientId === curId)
       .map(n => ({
         ...n,
-        actor: this.users.find(u => u.id === n.actorId) || { name: 'Stranger', avatar: NETFLIX_AVATARS[0].url }
+        actor: this.users.find(u => u.id === n.actorId) || { name: 'Stranger', avatar: NEXUS_AVATARS[0].url }
       }));
   }
 
@@ -646,7 +646,7 @@ class NetFlixgramStore {
 }
 
 // ============================================================================
-// 3. INSTAGRAM STORY PLAYBACK ENGINE (NETFLIX FLAVOR)
+// 3. STORY PLAYBACK ENGINE
 // ============================================================================
 class StoryViewerEngine {
   constructor({ store, onRenderStory, onProgressUpdate, onClose }) {
@@ -802,13 +802,13 @@ class StoryViewerEngine {
 // ============================================================================
 // 4. UI CONTROLLER & DOM INTEGRATION
 // ============================================================================
-class NetFlixgramApp {
+class NexusApp {
   constructor() {
-    this.store = new NetFlixgramStore();
+    this.store = new NexusStore();
     this.activeModalPost = null;
     this.selectedCreateType = 'post';
     this.createMediaAttachment = null;
-    this.selectedNewProfileAvatar = NETFLIX_AVATARS[0].url;
+    this.selectedNewProfileAvatar = NEXUS_AVATARS[0].url;
 
     this.cacheDOM();
     this.initStoryViewer();
@@ -1291,7 +1291,7 @@ class NetFlixgramApp {
   }
 
   renderAvatarOptions() {
-    this.avatarOptionsRow.innerHTML = NETFLIX_AVATARS.map((av, idx) => `
+    this.avatarOptionsRow.innerHTML = NEXUS_AVATARS.map((av, idx) => `
       <img src="${av.url}" class="avatar-option-choice ${idx === 0 ? 'selected' : ''}" data-url="${av.url}" alt="${av.name}" />
     `).join('');
 
@@ -1381,7 +1381,7 @@ class NetFlixgramApp {
       this.splitCommentsList.innerHTML = `<div style="color: var(--nfg-text-muted); font-size: 0.85rem; text-align: center; padding: 1rem 0;">No comments yet. Start the conversation!</div>`;
     } else {
       this.splitCommentsList.innerHTML = post.comments.map(c => {
-        const cAuthor = this.store.users.find(u => u.id === c.authorId) || { name: 'User', avatar: NETFLIX_AVATARS[0].url };
+        const cAuthor = this.store.users.find(u => u.id === c.authorId) || { name: 'User', avatar: NEXUS_AVATARS[0].url };
         return `
           <div class="comment-row">
             <img src="${cAuthor.avatar}" class="avatar-sm" alt="${cAuthor.name}" />
@@ -1432,7 +1432,7 @@ class NetFlixgramApp {
 
   triggerHeartPop(x, y) {
     const heart = document.createElement('div');
-    heart.className = 'netflix-heart-pop';
+    heart.className = 'nexus-heart-pop';
     heart.style.left = `${x}px`;
     heart.style.top = `${y}px`;
     heart.innerHTML = `
@@ -1795,11 +1795,11 @@ class NetFlixgramApp {
 }
 
 // Global window exposure for tests
-window.NetFlixgramStore = NetFlixgramStore;
+window.NexusStore = NexusStore;
 window.StoryViewerEngine = StoryViewerEngine;
-window.NetFlixgramApp = NetFlixgramApp;
+window.NexusApp = NexusApp;
 
 // Bootstrap Application
 window.addEventListener('DOMContentLoaded', () => {
-  window.app = new NetFlixgramApp();
+  window.app = new NexusApp();
 });
