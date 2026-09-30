@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus // Social Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Top Navigation Bar (Netflix Cinematic Header) -->
+  <header class="nfg-navbar" id="nfgNavbar">
+    <div class="nav-left">
+      <a class="nfg-brand" id="brandHomeBtn" title="Nexus Home">
+        <span class="brand-n">N</span>
+        <span class="brand-name">EXUS</span>
+      </a>
+      <nav class="nav-menu">
+        <a class="nav-link active" data-filter="all">Home</a>
+        <a class="nav-link" data-filter="reels">Reels</a>
+        <a class="nav-link" data-filter="trending">Trending</a>
+        <a class="nav-link" data-filter="my_list">My List</a>
+        <a class="nav-link" data-filter="explore">Explore</a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <!-- Search Input -->
+      <div class="nav-search-wrapper" id="searchWrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="globalSearchInput" placeholder="Titles, creators, #hashtags..." />
+        <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">&times;</button>
+      </div>
+
+      <!-- Create Post / Reel Trigger -->
+      <button class="btn-create" id="openCreateModalBtn" title="Create Post or Reel">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="4" ry="4"></rect>
+          <line x1="12" y1="8" x2="12" y2="16"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+        <span>Create</span>
+      </button>
+
+      <!-- Notifications Bell -->
+      <div class="notif-wrapper">
+        <button class="icon-btn" id="notifBellBtn" title="Notifications">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="badge" id="notifBadge" style="display: none;">0</span>
+        </button>
+
+        <!-- Notifications Dropdown -->
+        <div class="notif-dropdown" id="notifDropdown" style="display: none;">
+          <div class="notif-header">
+            <h4>Notifications</h4>
+            <button class="btn-text" id="markAllReadBtn">Mark all as read</button>
+          </div>
+          <div class="notif-list" id="notifList"></div>
+        </div>
+      </div>
+
+      <!-- User Profile Avatar ("Who's Watching?" trigger) -->
+      <div class="user-profile-chip" id="profileDropdownBtn" title="Who's Watching? (Switch Profile)">
+        <img src="" alt="Avatar" id="navUserAvatar" class="avatar-netflix" />
+        <span class="nav-username" id="navUserName">...</span>
+        <svg class="chevron-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="nfg-main">
+    <!-- Instagram Stories Shelf (Styled with Netflix Red Glowing Rings) -->
+    <section class="stories-shelf-wrapper">
+      <div class="stories-shelf" id="storiesShelf">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Netflix Billboard Hero Banner (Featured Top Post / Reel of the Day) -->
+    <section class="billboard-container" id="billboardContainer">
+      <div class="billboard-media-wrapper">
+        <img src="" alt="Billboard Cover" id="billboardBackdrop" class="billboard-backdrop" />
+        <video id="billboardVideo" class="billboard-video" loop muted playsinline style="display: none;"></video>
+      </div>
+
+      <!-- Netflix Vignette Overlays -->
+      <div class="billboard-vignette-left"></div>
+      <div class="billboard-vignette-bottom"></div>
+
+      <!-- Billboard Content Meta -->
+      <div class="billboard-meta">
+        <div class="billboard-tag-row">
+          <span class="n-symbol-pill">N</span>
+          <span class="billboard-badge">TOP POST OF THE DAY</span>
+          <span class="billboard-match" id="billboardMatch">99% Match</span>
+        </div>
+        <h1 class="billboard-title" id="billboardTitle">STRANGER THINGS // HAWKINS HIGHS</h1>
+        <p class="billboard-creator" id="billboardCreator">Posted by @eleven_hopper</p>
+        <p class="billboard-desc" id="billboardDesc">
+          Found the entrance to the Starcourt underground tunnel. Radio tuned to channel 11. Friends don't lie.
+        </p>
+
+        <div class="billboard-actions">
+          <button class="btn-billboard-play" id="billboardPlayBtn">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Watch Post</span>
+          </button>
+          <button class="btn-billboard-list" id="billboardListBtn">
+            <span class="btn-icon-plus" id="billboardListIcon">＋</span>
+            <span id="billboardListText">My List</span>
+          </button>
+          <button class="btn-sound-toggle" id="billboardSoundBtn" title="Toggle Sound">
+            <svg id="soundIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Filter Indicator Banner -->
+    <div class="active-filter-bar" id="activeFilterBar" style="display: none;">
+      <div class="filter-label-group">
+        <span class="filter-type-text">Filtering:</span>
+        <span class="filter-value-text" id="filterValueText">All</span>
+      </div>
+      <button class="btn-clear-filter" id="clearFilterBtn">Clear Filter &times;</button>
+    </div>
+
+    <!-- Feed Sections (Netflix Carousel Rows + Instagram Grid Cards) -->
+    <div class="nfg-rows-container" id="nfgRowsContainer">
+      <!-- Row 1: Top 10 Today -->
+      <section class="nfg-row" id="top10RowSection">
+        <h2 class="nfg-row-title">
+          <span>Top 10 Today</span>
+          <span class="row-subtitle">Most engaged reels and publications</span>
+        </h2>
+        <div class="top10-track" id="top10Track">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- Row 2: Trending Reels & Video Clips -->
+      <section class="nfg-row" id="reelsRowSection">
+        <h2 class="nfg-row-title">
+          <span>Trending Reels</span>
+          <span class="row-subtitle">9:16 vertical video shorts</span>
+        </h2>
+        <div class="reels-track" id="reelsTrack">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- Row 3: Main Feed Publications -->
+      <section class="nfg-row" id="feedRowSection">
+        <h2 class="nfg-row-title">
+          <span>Publications & Photo Feed</span>
+          <span class="row-subtitle">Stories and snapshots from following creators</span>
+        </h2>
+        <div class="feed-grid" id="mainFeedGrid">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- Row 4: My List / Saved Items -->
+      <section class="nfg-row" id="myListRowSection" style="display: none;">
+        <h2 class="nfg-row-title">
+          <span>My List</span>
+          <span class="row-subtitle">Your bookmarked reels and publications</span>
+        </h2>
+        <div class="feed-grid" id="myListGrid">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 1: "Who's Watching?" Netflix Profile Switcher Modal             -->
+  <!-- ===================================================================== -->
+  <div class="nfg-modal-backdrop" id="profileSwitcherModal" style="display: none;">
+    <div class="profile-switcher-card">
+      <h2 class="switcher-title">Who's Watching?</h2>
+      <div class="switcher-avatar-grid" id="switcherProfilesGrid">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div class="switcher-actions-row">
+        <button class="btn-manage-profiles" id="openAddProfileBtn">Add New Profile</button>
+        <button class="btn-manage-profiles" id="closeSwitcherBtn">Done</button>
+      </div>
+
+      <!-- Inline Add Profile Form -->
+      <form id="addProfileForm" class="add-profile-form" style="display: none;">
+        <h3>Create New Member Profile</h3>
+        <div class="form-row">
+          <input type="text" id="newMemberName" placeholder="Name (e.g. Dustin Henderson)" required />
+          <input type="text" id="newMemberHandle" placeholder="Handle (e.g. dusty_bun)" required />
+        </div>
+        <input type="text" id="newMemberBio" placeholder="Bio / Headline" />
+        <div class="avatar-select-section">
+          <label>Pick Avatar Theme:</label>
+          <div class="avatar-options-row" id="avatarOptionsRow"></div>
+        </div>
+        <div class="form-buttons">
+          <button type="button" class="btn-text" id="cancelAddProfileBtn">Cancel</button>
+          <button type="submit" class="btn-netflix-red">Create Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 2: Instagram Story Viewer Modal (Netflix Dark Phone Frame)       -->
+  <!-- ===================================================================== -->
+  <div class="nfg-modal-backdrop" id="storyViewerModal" style="display: none;">
+    <div class="story-phone-frame" id="storyPhoneFrame">
+      <!-- Segmented Story Progress Bars -->
+      <div class="story-progress-strip" id="storyProgressStrip"></div>
+
+      <!-- Story Header -->
+      <div class="story-header">
+        <div class="story-author-info">
+          <img src="" alt="Author" id="storyAuthorAvatar" class="avatar-story-header" />
+          <div class="story-author-text">
+            <span class="story-author-name" id="storyAuthorName">Author</span>
+            <span class="story-timestamp" id="storyTimestamp">1h ago</span>
+          </div>
+        </div>
+        <div class="story-header-actions">
+          <button class="story-pause-btn" id="storyPauseBtn" title="Pause / Resume">⏸</button>
+          <button class="story-close-btn" id="closeStoryModalBtn">&times;</button>
+        </div>
+      </div>
+
+      <!-- Story Media Display -->
+      <div class="story-viewport" id="storyViewport">
+        <img src="" alt="Story Media" id="storyImgMedia" class="story-media-element" />
+        <video id="storyVideoMedia" class="story-media-element" loop playsinline style="display: none;"></video>
+        
+        <!-- Story Tap Zones for Left/Right Navigation -->
+        <div class="story-tap-zone left" id="storyTapLeft" title="Previous Story"></div>
+        <div class="story-tap-zone right" id="storyTapRight" title="Next Story"></div>
+
+        <!-- Story Caption Overlay -->
+        <div class="story-caption-overlay" id="storyCaptionOverlay">
+          <p id="storyCaptionText">Story caption here...</p>
+        </div>
+      </div>
+
+      <!-- Story Bottom Quick Reply -->
+      <div class="story-reply-strip">
+        <input type="text" id="storyReplyInput" placeholder="Send message..." />
+        <button class="btn-story-like" id="storyLikeBtn">❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 3: Create Post / Reel / Story Modal                              -->
+  <!-- ===================================================================== -->
+  <div class="nfg-modal-backdrop" id="createPostModal" style="display: none;">
+    <div class="create-post-dialog">
+      <div class="dialog-header">
+        <h3>Create New Publication</h3>
+        <button class="dialog-close-btn" id="closeCreateModalBtn">&times;</button>
+      </div>
+
+      <div class="create-tabs">
+        <button class="create-tab active" data-type="post">Feed Post</button>
+        <button class="create-tab" data-type="reel">Reel Short (9:16)</button>
+        <button class="create-tab" data-type="story">24h Story</button>
+      </div>
+
+      <form id="createPostForm" class="create-form">
+        <!-- Media Upload Dropzone -->
+        <div class="media-dropzone" id="mediaDropzone">
+          <input type="file" id="createFileInput" accept="image/*,video/*" style="display: none;" />
+          <div class="dropzone-empty" id="dropzoneEmpty">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#E50914" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <p><strong>Click to browse</strong> or drag & drop photo or video</p>
+            <span class="sub-hint">Supports MP4, WebM, PNG, JPG, GIF</span>
+          </div>
+          <!-- Preview container -->
+          <div class="dropzone-preview" id="dropzonePreview" style="display: none;">
+            <div id="dropzoneMediaHost"></div>
+            <button type="button" class="btn-remove-upload" id="removeUploadBtn">&times;</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="createCaptionInput">Caption & Description</label>
+          <textarea id="createCaptionInput" rows="3" placeholder="Write a caption... Tag #netflix #strangerthings #tech"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Hashtags & Themes</label>
+          <div class="quick-tags-strip">
+            <span class="quick-chip" data-tag="trending">+ #trending</span>
+            <span class="quick-chip" data-tag="netflix">+ #netflix</span>
+            <span class="quick-chip" data-tag="strangerthings">+ #strangerthings</span>
+            <span class="quick-chip" data-tag="wednesday">+ #wednesday</span>
+            <span class="quick-chip" data-tag="cyberpunk">+ #cyberpunk</span>
+            <span class="quick-chip" data-tag="tech">+ #tech</span>
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <button type="button" class="btn-secondary" id="cancelCreateBtn">Cancel</button>
+          <button type="submit" class="btn-netflix-red" id="submitCreateBtn">Publish to Nexus</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 4: Post & Reel Split Detail View (Instagram x Netflix Player)    -->
+  <!-- ===================================================================== -->
+  <div class="nfg-modal-backdrop" id="postDetailModal" style="display: none;">
+    <div class="detail-split-dialog">
+      <button class="split-modal-close" id="closeDetailModalBtn">&times;</button>
+
+      <!-- Media Column (Left) -->
+      <div class="split-media-pane" id="splitMediaPane">
+        <div id="splitMediaHost"></div>
+        <div class="double-tap-hint">Double-tap media to like ❤️</div>
+      </div>
+
+      <!-- Social & Comments Column (Right) -->
+      <div class="split-social-pane">
+        <!-- Creator Header -->
+        <div class="split-creator-header">
+          <div class="creator-left" id="splitCreatorBlock">
+            <img src="" alt="Avatar" id="splitAuthorAvatar" class="avatar-sm" />
+            <div class="creator-names">
+              <span class="split-author-name" id="splitAuthorName">Author</span>
+              <span class="split-author-handle" id="splitAuthorHandle">@handle</span>
+            </div>
+          </div>
+          <button class="btn-follow" id="splitFollowBtn">+ Follow</button>
+        </div>
+
+        <!-- Caption & Comments Scroll Area -->
+        <div class="split-comments-body" id="splitCommentsBody">
+          <!-- Caption Item -->
+          <div class="caption-comment-item">
+            <img src="" alt="Avatar" id="splitCaptionAvatar" class="avatar-sm" />
+            <div class="comment-content">
+              <p><strong id="splitCaptionAuthorName">Author</strong> <span id="splitCaptionText">Caption text</span></p>
+              <div class="split-tags-row" id="splitTagsRow"></div>
+              <span class="comment-time" id="splitPostTime">2h ago</span>
+            </div>
+          </div>
+          <div class="divider-line"></div>
+          <!-- Dynamic Comments List -->
+          <div class="comments-scroll-list" id="splitCommentsList"></div>
+        </div>
+
+        <!-- Engagement Action Bar -->
+        <div class="split-engagement-footer">
+          <div class="engagement-icons-row">
+            <div class="engagement-left">
+              <button class="icon-btn-action" id="splitLikeBtn" title="Like">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+              <button class="icon-btn-action" id="splitCommentFocusBtn" title="Comment">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+              </button>
+              <button class="icon-btn-action" id="splitShareBtn" title="Share">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+            <button class="icon-btn-action" id="splitMyListBtn" title="Add to My List">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="likes-count-text" id="splitLikesCount">0 likes</div>
+
+          <!-- Add Comment Bar -->
+          <form id="splitAddCommentForm" class="add-comment-bar">
+            <input type="text" id="splitCommentInput" placeholder="Add a comment for the cast..." required />
+            <button type="submit" class="btn-post-comment">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Floating Container -->
+  <div class="nfg-toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
