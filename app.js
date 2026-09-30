@@ -21,7 +21,7 @@ const SEED_DATA = {
       name: 'Eleven',
       handle: 'eleven_hopper',
       bio: 'Friends don\'t lie. Waffles, telekinesis, and Hawkins High. 🧇✨',
-      avatar: NEXUS_AVATARS[0].url,
+      avatar: NEXUS_AVATARS[3].url,
       coverBanner: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
       followers: ['usr_geralt', 'usr_wednesday', 'usr_v'],
       following: ['usr_geralt', 'usr_wednesday'],
@@ -57,7 +57,7 @@ const SEED_DATA = {
       name: 'V (Night City)',
       handle: 'cyber_v',
       bio: 'Mercenary legend of Night City. Chrome, netrunning, and neon nights. 🦾⚡',
-      avatar: NEXUS_AVATARS[3].url,
+      avatar: NEXUS_AVATARS[4].url,
       coverBanner: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
       followers: ['usr_geralt'],
       following: ['usr_eleven'],
@@ -287,6 +287,12 @@ class NexusStore {
         this.currentUserId = parsed.currentUserId || this.users[0].id;
       } else {
         this.resetSeeds();
+      }
+
+      const eleven = this.users.find(user => user.id === 'usr_eleven');
+      if (eleven && eleven.avatar === NEXUS_AVATARS[0].url) {
+        eleven.avatar = NEXUS_AVATARS[3].url;
+        this.persist();
       }
     } catch (e) {
       this.resetSeeds();
